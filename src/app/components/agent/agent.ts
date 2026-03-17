@@ -37,7 +37,7 @@ export class Agent {
     this.igrackеService.igracke$.subscribe(data => {
       if (data.length > 0) this.igracke = data;
     });
-    this.dodajPoruku('agent', '👋 Zdravo! Ja sam Igor, vaš asistent. Mogu da vam pomognem da pronađete igračke. Probajte: "pokaži slagalice", "igračke za devojčice", "najjeftinije igračke"');
+    this.dodajPoruku('agent', ' Zdravo! Ja sam Igor, vaš asistent. Mogu da vam pomognem da pronađete igračke. Probajte: "pokaži slagalice", "igračke za devojčice", "najjeftinije igračke"');
   }
 
   toggleAgent() {
@@ -64,7 +64,7 @@ export class Agent {
   generisiOdgovor(tekst: string): string {
     // Pozdrav
     if (tekst.includes('zdravo') || tekst.includes('cao') || tekst.includes('bok')) {
-      return '👋 Zdravo! Kako mogu da vam pomognem?';
+      return ' Zdravo! Kako mogu da vam pomognem?';
     }
 
     // Pretraga po tipu
@@ -127,14 +127,14 @@ export class Agent {
     // Najjeftinije
     if (tekst.includes('jeftin') || tekst.includes('najjeftin')) {
       const sortirane = [...this.igracke].sort((a, b) => a.price - b.price).slice(0, 5);
-      return '💰 Najjeftinije igračke:\n' + sortirane.map(i =>
+      return ' Najjeftinije igračke:\n' + sortirane.map(i =>
         `• ${i.name} — ${i.price} RSD`).join('\n');
     }
 
     // Najskuplje
     if (tekst.includes('skupl') || tekst.includes('najskuplj')) {
       const sortirane = [...this.igracke].sort((a, b) => b.price - a.price).slice(0, 5);
-      return '💎 Najskuplje igračke:\n' + sortirane.map(i =>
+      return ' Najskuplje igračke:\n' + sortirane.map(i =>
         `• ${i.name} — ${i.price} RSD`).join('\n');
     }
 
@@ -143,12 +143,12 @@ export class Agent {
       i.name.toLowerCase().includes(tekst)
     );
     if (nadjena.length > 0) {
-      return '🔍 Pronašao sam:\n' + nadjena.map(i =>
+      return ' Pronašao sam:\n' + nadjena.map(i =>
         `• ${i.name} — ${i.price} RSD (${i.type.name})`).join('\n');
     }
 
     // Default
-    return '🤔 Nisam razumeo. Probajte: "slagalice", "igračke za dečake", "najjeftinije", "vozila", "edukativne"';
+    return ' Nisam razumeo. Probajte: "slagalice", "igračke za dečake", "najjeftinije", "vozila", "edukativne"';
   }
 
   prikaziIgrackePoTipu(tip: string): string {
@@ -156,7 +156,7 @@ export class Agent {
       i.type.name.toLowerCase() === tip.toLowerCase()
     );
     if (rezultat.length === 0) return `Nema igračaka tipa "${tip}".`;
-    return `🧸 ${tip}:\n` + rezultat.map(i =>
+    return ` ${tip}:\n` + rezultat.map(i =>
       `• ${i.name} — ${i.price} RSD`).join('\n');
   }
 
@@ -165,7 +165,7 @@ export class Agent {
       i.targetGroup.toLowerCase() === grupa.toLowerCase()
     );
     if (rezultat.length === 0) return `Nema igračaka za "${grupa}".`;
-    return `🧸 Igračke za ${grupa}:\n` + rezultat.map(i =>
+    return ` Igračke za ${grupa}:\n` + rezultat.map(i =>
       `• ${i.name} — ${i.price} RSD`).join('\n');
   }
 
@@ -174,7 +174,7 @@ export class Agent {
       i.ageGroup.name.toLowerCase() === uzrast.toLowerCase()
     );
     if (rezultat.length === 0) return `Nema igračaka za uzrast "${uzrast}".`;
-    return `👶 Uzrast ${uzrast}:\n` + rezultat.map(i =>
+    return ` Uzrast ${uzrast}:\n` + rezultat.map(i =>
       `• ${i.name} — ${i.price} RSD`).join('\n');
   }
 }
